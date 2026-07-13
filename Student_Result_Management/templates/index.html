@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result Management System</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+    <div class="logo">
+        🎓 Student Result
+    </div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#developer">Developer</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+
+</nav>
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>
+            Student Result<br>
+            Management System
+        </h1>
+
+        <p>
+
+            A modern web application to manage student records,
+            calculate results, search students, update marks,
+            analyze performance and generate reports.
+
+        </p>
+
+        <a href="/dashboard" class="btn">
+            Get Started
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <h2>About Project</h2>
+
+    <p>
+
+        Student Result Management System is developed to simplify
+        student record management for schools and colleges.
+
+        It helps administrators manage student information,
+        update marks, calculate grades, analyze performance,
+        and maintain records efficiently.
+
+    </p>
+
+</section>
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features" id="features">
+
+    <h2>Our Features</h2>
+
+    <div class="feature-container">
+
+        <div class="card">
+            <i class="fa-solid fa-user-plus"></i>
+            <h3>Add Student</h3>
+            <p>Add new student records easily.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-users"></i>
+            <h3>View Students</h3>
+            <p>Display all student records.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <h3>Search Student</h3>
+            <p>Search students using Roll Number.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-pen"></i>
+            <h3>Update Marks</h3>
+            <p>Edit and update marks anytime.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-trash"></i>
+            <h3>Delete Student</h3>
+            <p>Remove unwanted student records.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-square-poll-vertical"></i>
+            <h3>Statistics</h3>
+            <p>View class statistics and reports.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-trophy"></i>
+            <h3>Show Topper</h3>
+            <p>Display the class topper instantly.</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Performance</h3>
+            <p>Analyze overall student performance.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
+
+<section class="why">
+
+    <h2>Why Choose Our System?</h2>
+
+    <div class="why-container">
+
+        <div class="why-box">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>Fast</h3>
+        </div>
+
+        <div class="why-box">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Secure</h3>
+        </div>
+
+        <div class="why-box">
+            <i class="fa-solid fa-laptop"></i>
+            <h3>Responsive</h3>
+        </div>
+
+        <div class="why-box">
+            <i class="fa-solid fa-face-smile"></i>
+            <h3>User Friendly</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= DEVELOPER ================= -->
+
+<section class="developer" id="developer">
+
+    <h2>Developer</h2>
+
+    <div class="developer-card">
+
+        <h3>Mahirabanu Shadakwala</h3>
+
+        <p>
+
+            B.Tech Artificial Intelligence & Data Science Student
+
+        </p>
+
+        <p>
+
+            Passionate about Python, Data Science,
+            Machine Learning and Web Development.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+    <h2>Contact</h2>
+
+    <p>
+
+        Thank you for visiting the Student Result Management System.
+
+    </p>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+
+        © 2026 Student Result Management System
+
+    </p>
+
+    <p>
+
+        Developed by Mahirabanu Shadakwala
+
+    </p>
+
+</footer>
+
+<!-- JavaScript -->
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

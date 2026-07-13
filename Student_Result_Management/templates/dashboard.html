@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+<body>
+
+<header>
+
+    <h1>🎓 Student Result Management</h1>
+
+    <a href="/" class="home-btn">
+        Home
+    </a>
+
+</header>
+
+<section class="dashboard">
+
+    <h2>Dashboard</h2>
+
+    <p>Select an option below to continue.</p>
+
+    <div class="cards">
+
+        <a href="/add_student" class="card">
+            <i class="fa-solid fa-user-plus"></i>
+            <h3>Add Student</h3>
+        </a>
+
+        <a href="/view_students" class="card">
+            <i class="fa-solid fa-users"></i>
+            <h3>View Students</h3>
+        </a>
+
+        <a href="/search_student" class="card">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <h3>Search Student</h3>
+        </a>
+
+        <a href="/update_student" class="card">
+            <i class="fa-solid fa-pen"></i>
+            <h3>Update Student</h3>
+        </a>
+
+        <a href="/delete_student" class="card">
+            <i class="fa-solid fa-trash"></i>
+            <h3>Delete Student</h3>
+        </a>
+
+        <a href="/calculate_result" class="card">
+            <i class="fa-solid fa-square-poll-vertical"></i>
+            <h3>Calculate Result</h3>
+        </a>
+
+        <a href="/topper" class="card">
+            <i class="fa-solid fa-trophy"></i>
+            <h3>Show Topper</h3>
+        </a>
+
+        <a href="/statistics" class="card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Statistics</h3>
+        </a>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <p>© 2026 Student Result Management System</p>
+
+</footer>
+
+</body>
+</html>

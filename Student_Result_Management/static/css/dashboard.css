@@ -1,0 +1,238 @@
+/* ===========================
+   Google Font
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+header{
+
+    width:100%;
+
+    height:80px;
+
+    background:#2563EB;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 60px;
+
+    color:white;
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+
+}
+
+header h1{
+
+    font-size:28px;
+
+}
+
+.home-btn{
+
+    text-decoration:none;
+
+    color:white;
+
+    background:white;
+
+    color:#2563EB;
+
+    padding:10px 25px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.home-btn:hover{
+
+    background:#1E3A8A;
+
+    color:white;
+
+}
+
+/* ===========================
+   Dashboard
+=========================== */
+
+.dashboard{
+
+    width:90%;
+
+    margin:60px auto;
+
+    text-align:center;
+
+}
+
+.dashboard h2{
+
+    font-size:40px;
+
+    color:#1E3A8A;
+
+}
+
+.dashboard p{
+
+    margin-top:15px;
+
+    color:#666;
+
+    font-size:18px;
+
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.cards{
+
+    margin-top:50px;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+}
+
+/* ===========================
+   Card
+=========================== */
+
+.card{
+
+    text-decoration:none;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+    transition:.4s;
+
+    color:#333;
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 35px rgba(37,99,235,.3);
+
+}
+
+.card i{
+
+    font-size:50px;
+
+    color:#2563EB;
+
+    margin-bottom:20px;
+
+}
+
+.card h3{
+
+    font-size:22px;
+
+    margin-bottom:10px;
+
+}
+
+.card p{
+
+    color:#666;
+
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+footer{
+
+    background:#1E3A8A;
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+
+    margin-top:60px;
+
+}
+
+footer p{
+
+    color:white;
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:768px){
+
+header{
+
+    flex-direction:column;
+
+    height:auto;
+
+    padding:20px;
+
+}
+
+header h1{
+
+    margin-bottom:15px;
+
+    text-align:center;
+
+}
+
+.dashboard h2{
+
+    font-size:30px;
+
+}
+
+.cards{
+
+    grid-template-columns:1fr;
+
+}
+
+}
