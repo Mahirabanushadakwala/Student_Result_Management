@@ -1,2 +1,4 @@
 1,Mahirabanu Shadakwala ,98,87,90
-2,Khushi Sharma,90,87,93
+3,Mubina Malaiwala ,80,90,89
+2,Khushi Sharma ,90,76,89
+4,Bariya Parth ,90,67,88
