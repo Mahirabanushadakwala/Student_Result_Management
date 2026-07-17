@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topper</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<header class="app-header">
+    <a href="/" class="brand"><i class="fa-solid fa-graduation-cap"></i> Student Result</a>
+    <nav><a href="/dashboard"><i class="fa-solid fa-arrow-left"></i> Dashboard</a></nav>
+</header>
+
+<main class="page">
+    <div class="page-inner">
+
+        <h1 class="page-title"><i class="fa-solid fa-trophy"></i> Class Topper</h1>
+        <p class="page-sub">The student with the highest overall percentage.</p>
+
+        {% if topper %}
+            <div class="result">
+                <h2>{{ topper[1] }}</h2>
+                <p><strong>Roll Number:</strong> {{ topper[0] }}</p>
+                <p><strong>Math:</strong> {{ topper[2] }}</p>
+                <p><strong>Science:</strong> {{ topper[3] }}</p>
+                <p><strong>English:</strong> {{ topper[4] }}</p>
+                <p><strong>Percentage:</strong></p>
+                <span class="grade-badge">{{ percentage }}%</span>
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <i class="fa-solid fa-inbox"></i>
+                <p>No student records found yet. Add a student to see the topper here.</p>
+            </div>
+        {% endif %}
+
+        <a href="/dashboard" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 Student Result Management System</p>
+</footer>
+
+</body>
+</html>

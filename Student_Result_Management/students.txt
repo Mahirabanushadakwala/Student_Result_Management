@@ -2,3 +2,4 @@
 3,Mubina Malaiwala ,80,90,89
 2,Khushi Sharma ,90,76,89
 4,Bariya Parth ,90,67,88
+6,Abdul Hadi,98,77,90

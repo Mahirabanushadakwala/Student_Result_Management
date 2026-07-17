@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<header class="app-header">
+    <a href="/" class="brand"><i class="fa-solid fa-graduation-cap"></i> Student Result</a>
+    <nav><a href="/dashboard"><i class="fa-solid fa-arrow-left"></i> Dashboard</a></nav>
+</header>
+
+<main class="page">
+    <div class="page-inner">
+
+        <h1 class="page-title"><i class="fa-solid fa-pen"></i> Update Student</h1>
+        <p class="page-sub">Enter a roll number and the new marks to update.</p>
+
+        {% if message %}
+            <p class="success"><i class="fa-solid fa-circle-check"></i> {{ message }}</p>
+        {% endif %}
+
+        <div class="form-card">
+            <form method="POST">
+
+                <label>Roll Number</label>
+                <input type="number" name="roll" required>
+
+                <label>Math Marks</label>
+                <input type="number" name="math" required>
+
+                <label>Science Marks</label>
+                <input type="number" name="science" required>
+
+                <label>English Marks</label>
+                <input type="number" name="english" required>
+
+                <button type="submit"><i class="fa-solid fa-pen"></i> Update Student</button>
+
+            </form>
+        </div>
+
+        <a href="/dashboard" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 Student Result Management System</p>
+</footer>
+
+</body>
+</html>

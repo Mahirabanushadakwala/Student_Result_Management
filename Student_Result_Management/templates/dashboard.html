@@ -1,89 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Dashboard</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
-<header>
-
-    <h1>🎓 Student Result Management</h1>
-
-    <a href="/" class="home-btn">
-        Home
-    </a>
-
+<header class="app-header">
+    <a href="/" class="brand"><i class="fa-solid fa-graduation-cap"></i> Student Result Management</a>
+    <nav><a href="/"><i class="fa-solid fa-house"></i> Home</a></nav>
 </header>
 
-<section class="dashboard">
+<main class="page">
+    <div class="page-inner wide">
 
-    <h2>Dashboard</h2>
+        <h1 class="page-title"><i class="fa-solid fa-table-columns"></i> Dashboard</h1>
+        <p class="page-sub">Select an option below to continue.</p>
 
-    <p>Select an option below to continue.</p>
+        <div class="dashboard-cards">
 
-    <div class="cards">
+            <a href="/add_student" class="card">
+                <div class="icon-wrap"><i class="fa-solid fa-user-plus"></i></div>
+                <h3>Add Student</h3>
+                <p>Add new student records easily.</p>
+            </a>
 
-        <a href="/add_student" class="card">
-            <i class="fa-solid fa-user-plus"></i>
-            <h3>Add Student</h3>
-        </a>
+            <a href="/view_students" class="card">
+                <div class="icon-wrap"><i class="fa-solid fa-users"></i></div>
+                <h3>View Students</h3>
+                <p>Display all student records.</p>
+            </a>
 
-        <a href="/view_students" class="card">
-            <i class="fa-solid fa-users"></i>
-            <h3>View Students</h3>
-        </a>
+            <a href="/search_student" class="card">
+                <div class="icon-wrap"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <h3>Search Student</h3>
+                <p>Search students using Roll Number.</p>
+            </a>
 
-        <a href="/search_student" class="card">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <h3>Search Student</h3>
-        </a>
+            <a href="/update_student" class="card">
+                <div class="icon-wrap"><i class="fa-solid fa-pen"></i></div>
+                <h3>Update Student</h3>
+                <p>Edit and update marks anytime.</p>
+            </a>
 
-        <a href="/update_student" class="card">
-            <i class="fa-solid fa-pen"></i>
-            <h3>Update Student</h3>
-        </a>
+            <a href="/delete_student" class="card">
+                <div class="icon-wrap"><i class="fa-solid fa-trash"></i></div>
+                <h3>Delete Student</h3>
+                <p>Remove unwanted student records.</p>
+            </a>
 
-        <a href="/delete_student" class="card">
-            <i class="fa-solid fa-trash"></i>
-            <h3>Delete Student</h3>
-        </a>
+            <a href="/calculate_result" class="card">
+                <div class="icon-wrap"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                <h3>Calculate Result</h3>
+                <p>Get total, percentage and grade.</p>
+            </a>
 
-        <a href="/calculate_result" class="card">
-            <i class="fa-solid fa-square-poll-vertical"></i>
-            <h3>Calculate Result</h3>
-        </a>
+            <a href="/topper" class="card">
+                <div class="icon-wrap"><i class="fa-solid fa-trophy"></i></div>
+                <h3>Show Topper</h3>
+                <p>Display the class topper instantly.</p>
+            </a>
 
-        <a href="/topper" class="card">
-            <i class="fa-solid fa-trophy"></i>
-            <h3>Show Topper</h3>
-        </a>
+            <a href="/statistics" class="card">
+                <div class="icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>Statistics</h3>
+                <p>View class statistics and reports.</p>
+            </a>
 
-        <a href="/statistics" class="card">
-            <i class="fa-solid fa-chart-line"></i>
-            <h3>Statistics</h3>
-        </a>
+        </div>
 
     </div>
-
-</section>
+</main>
 
 <footer>
-
     <p>© 2026 Student Result Management System</p>
-
 </footer>
 
 </body>

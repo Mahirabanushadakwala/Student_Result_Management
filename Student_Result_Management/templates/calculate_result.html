@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Student</title>
+    <title>Calculate Result</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,36 +20,25 @@
 <main class="page">
     <div class="page-inner">
 
-        <h1 class="page-title"><i class="fa-solid fa-magnifying-glass"></i> Search Student</h1>
-        <p class="page-sub">Look up a student's marks by roll number.</p>
+        <h1 class="page-title"><i class="fa-solid fa-square-poll-vertical"></i> Calculate Result</h1>
+        <p class="page-sub">Enter a roll number to calculate total marks, percentage, and grade.</p>
 
         <div class="form-card">
             <form method="POST">
                 <label>Enter Roll Number</label>
                 <input type="number" name="roll" required>
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                <button type="submit"><i class="fa-solid fa-calculator"></i> Calculate</button>
             </form>
         </div>
 
         {% if student %}
-            <h2 class="page-title" style="margin-top:36px; font-size:1.3rem;">Student Details</h2>
-            <div class="table-wrap">
-                <table>
-                    <tr>
-                        <th>Roll</th>
-                        <th>Name</th>
-                        <th>Math</th>
-                        <th>Science</th>
-                        <th>English</th>
-                    </tr>
-                    <tr>
-                        <td>{{ student[0] }}</td>
-                        <td>{{ student[1] }}</td>
-                        <td>{{ student[2] }}</td>
-                        <td>{{ student[3] }}</td>
-                        <td>{{ student[4] }}</td>
-                    </tr>
-                </table>
+            <div class="result">
+                <h2>{{ student[1] }}</h2>
+                <p><b>Roll Number:</b> {{ student[0] }}</p>
+                <p><b>Total Marks:</b> {{ total }}/300</p>
+                <p><b>Percentage:</b> {{ percentage }}%</p>
+                <p><b>Grade:</b></p>
+                <span class="grade-badge">{{ grade }}</span>
             </div>
         {% endif %}
 

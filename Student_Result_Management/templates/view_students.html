@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Students</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<header class="app-header">
+    <a href="/" class="brand"><i class="fa-solid fa-graduation-cap"></i> Student Result</a>
+    <nav><a href="/dashboard"><i class="fa-solid fa-arrow-left"></i> Dashboard</a></nav>
+</header>
+
+<main class="page">
+    <div class="page-inner wide">
+
+        <h1 class="page-title"><i class="fa-solid fa-users"></i> Student Records</h1>
+        <p class="page-sub">All students currently on file.</p>
+
+        {% if students %}
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Roll No</th>
+                        <th>Name</th>
+                        <th>Math</th>
+                        <th>Science</th>
+                        <th>English</th>
+                    </tr>
+                    {% for student in students %}
+                        <tr>
+                            <td>{{ student[0] }}</td>
+                            <td>{{ student[1] }}</td>
+                            <td>{{ student[2] }}</td>
+                            <td>{{ student[3] }}</td>
+                            <td>{{ student[4] }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <i class="fa-solid fa-inbox"></i>
+                <p>No students added yet. Use "Add Student" from the dashboard to get started.</p>
+            </div>
+        {% endif %}
+
+        <a href="/dashboard" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 Student Result Management System</p>
+</footer>
+
+</body>
+</html>
