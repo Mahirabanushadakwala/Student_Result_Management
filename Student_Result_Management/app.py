@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import sqlite3
 
 app = Flask(__name__)
 
@@ -15,6 +16,8 @@ def dashboard():
 @app.route("/add_student", methods=["GET", "POST"])
 def add_student():
 
+    message = ""
+
     if request.method == "POST":
 
         roll = request.form["roll"]
@@ -23,62 +26,79 @@ def add_student():
         science = request.form["science"]
         english = request.form["english"]
 
-        with open("students.txt", "a") as file:
-            file.write(f"{roll},{name},{math},{science},{english}\n")
+        connection = sqlite3.connect("database.db")
 
-        return render_template(
-            "add_student.html",
-            message="Student Added Successfully!"
-        )
+        cursor = connection.cursor()
 
-    return render_template("add_student.html")
+        try:
 
+            cursor.execute(
+                """
+                INSERT INTO students
+                (roll,name,math,science,english)
+                VALUES(?,?,?,?,?)
+                """,
+                (roll,name,math,science,english)
+            )
+
+            connection.commit()
+
+            message = "Student Added Successfully!"
+
+        except sqlite3.IntegrityError:
+
+            message = "Roll Number Already Exists!"
+
+        connection.close()
+
+    return render_template("add_student.html", message=message)
     
 @app.route("/view_students")
 def view_students():
 
-    students = []
+    connection = sqlite3.connect("database.db")
 
-    try:
-        file = open("students.txt", "r")
+    cursor = connection.cursor()
 
-        for line in file:
-            student = line.strip().split(",")
-            students.append(student)
+    cursor.execute("SELECT * FROM students")
 
-        file.close()
+    students = cursor.fetchall()
 
-    except FileNotFoundError:
-        pass
+    connection.close()
 
-    return render_template("view_students.html", students=students)
+    return render_template(
+        "view_students.html",
+        students=students
+    )
 
 @app.route("/search_student", methods=["GET", "POST"])
 def search_student():
 
-    student_data = None
+    student = None
 
     if request.method == "POST":
 
         roll = request.form["roll"]
 
-        try:
-            with open("students.txt", "r") as file:
+        connection = sqlite3.connect("database.db")
 
-                for line in file:
+        cursor = connection.cursor()
 
-                    student = line.strip().split(",")
+        cursor.execute(
+            "SELECT * FROM students WHERE roll=?",
+            (roll,)
+        )
 
-                    if student[0] == roll:
-                        student_data = student
-                        break
+        student = cursor.fetchone()
 
-        except FileNotFoundError:
-            pass
+        connection.close()
 
-    return render_template("search_student.html", student=student_data)
+    return render_template(
+        "search_student.html",
+        student=student
+    )
 
-@app.route("/update_student", methods=["GET", "POST"])
+@app.route("/update_student", methods=["GET","POST"])
 def update_student():
 
     message = ""
@@ -90,39 +110,34 @@ def update_student():
         science = request.form["science"]
         english = request.form["english"]
 
-        students = []
+        connection = sqlite3.connect("database.db")
 
-        try:
+        cursor = connection.cursor()
 
-            with open("students.txt", "r") as file:
+        cursor.execute("""
+        UPDATE students
+        SET math=?,
+            science=?,
+            english=?
+        WHERE roll=?
+        """,
+        (math, science, english, roll))
 
-                for line in file:
+        connection.commit()
 
-                    student = line.strip().split(",")
-
-                    if student[0] == roll:
-
-                        student[2] = math
-                        student[3] = science
-                        student[4] = english
-
-                    students.append(student)
-
-            with open("students.txt", "w") as file:
-
-                for student in students:
-
-                    file.write(",".join(student) + "\n")
-
+        if cursor.rowcount > 0:
             message = "Student Updated Successfully!"
+        else:
+            message = "Student Not Found!"
 
-        except FileNotFoundError:
+        connection.close()
 
-            message = "Student File Not Found!"
+    return render_template(
+        "update_student.html",
+        message=message
+    )
 
-    return render_template("update_student.html", message=message)
-
-@app.route("/delete_student", methods=["GET", "POST"])
+@app.route("/delete_student", methods=["GET","POST"])
 def delete_student():
 
     message = ""
@@ -131,135 +146,92 @@ def delete_student():
 
         roll = request.form["roll"]
 
-        students = []
-        found = False
+        connection = sqlite3.connect("database.db")
 
-        try:
+        cursor = connection.cursor()
 
-            with open("students.txt", "r") as file:
+        cursor.execute(
+            "DELETE FROM students WHERE roll=?",
+            (roll,)
+        )
 
-                for line in file:
+        connection.commit()
 
-                    student = line.strip().split(",")
+        if cursor.rowcount > 0:
+            message = "Student Deleted Successfully!"
+        else:
+            message = "Student Not Found!"
 
-                    if student[0] != roll:
+        connection.close()
 
-                        students.append(student)
-
-                    else:
-
-                        found = True
-
-            with open("students.txt", "w") as file:
-
-                for student in students:
-
-                    file.write(",".join(student) + "\n")
-
-            if found:
-
-                message = "Student Deleted Successfully!"
-
-            else:
-
-                message = "Student Not Found!"
-
-        except FileNotFoundError:
-
-            message = "students.txt file not found!"
-
-    return render_template("delete_student.html", message=message)
+    return render_template(
+        "delete_student.html",
+        message=message
+    )
 
 @app.route("/statistics")
 def statistics():
 
-    total_students = 0
-    last_student = "No Student"
+    connection = sqlite3.connect("database.db")
 
-    total_math = 0
-    total_science = 0
-    total_english = 0
+    cursor = connection.cursor()
 
-    try:
+    cursor.execute("SELECT COUNT(*) FROM students")
+    total_students = cursor.fetchone()[0]
 
-        with open("students.txt", "r") as file:
+    cursor.execute("""
+        SELECT AVG((math + science + english)/3.0)
+        FROM students
+    """)
+    average = cursor.fetchone()[0]
 
-            students = file.readlines()
+    cursor.execute("""
+        SELECT name
+        FROM students
+        ORDER BY rowid DESC
+        LIMIT 1
+    """)
+    last = cursor.fetchone()
 
-        total_students = len(students)
+    last_student = last[0] if last else "No Student"
 
-        if total_students > 0:
-
-            last = students[-1].strip().split(",")
-
-            last_student = last[1]
-
-            for line in students:
-
-                student = line.strip().split(",")
-
-                total_math += int(student[2])
-                total_science += int(student[3])
-                total_english += int(student[4])
-
-            overall_average = (
-                total_math +
-                total_science +
-                total_english
-            ) / (total_students * 3)
-
-        else:
-
-            overall_average = 0
-
-    except FileNotFoundError:
-
-        overall_average = 0
+    connection.close()
 
     return render_template(
         "statistics.html",
         total_students=total_students,
-        last_student=last_student,
-        average=round(overall_average,2)
+        average=round(average or 0, 2),
+        last_student=last_student
     )
     
 @app.route("/topper")
 def topper():
 
-    topper = None
-    highest_percentage = 0
+    connection = sqlite3.connect("database.db")
 
-    try:
+    cursor = connection.cursor()
 
-        with open("students.txt", "r") as file:
+    cursor.execute("""
+        SELECT *,
+        ((math + science + english)/3.0) AS percentage
+        FROM students
+        ORDER BY percentage DESC
+        LIMIT 1
+    """)
 
-            for line in file:
+    topper = cursor.fetchone()
 
-                student = line.strip().split(",")
+    connection.close()
 
-                math = int(student[2])
-                science = int(student[3])
-                english = int(student[4])
-
-                total = math + science + english
-                percentage = total / 3
-
-                if percentage > highest_percentage:
-
-                    highest_percentage = percentage
-                    topper = student
-
-    except FileNotFoundError:
-
-        pass
+    percentage = round(topper[5], 2) if topper else 0
 
     return render_template(
         "topper.html",
         topper=topper,
-        percentage=round(highest_percentage,2)
+        percentage=percentage
     )
     
-@app.route("/calculate_result", methods=["GET", "POST"])
+@app.route("/calculate_result", methods=["GET","POST"])
 def calculate_result():
 
     student = None
@@ -271,56 +243,43 @@ def calculate_result():
 
         roll = request.form["roll"]
 
-        try:
+        connection = sqlite3.connect("database.db")
 
-            with open("students.txt", "r") as file:
+        cursor = connection.cursor()
 
-                for line in file:
+        cursor.execute(
+            "SELECT * FROM students WHERE roll=?",
+            (roll,)
+        )
 
-                    data = line.strip().split(",")
+        student = cursor.fetchone()
 
-                    if data[0] == roll:
+        connection.close()
 
-                        student = data
+        if student:
 
-                        math = int(data[2])
-                        science = int(data[3])
-                        english = int(data[4])
+            total = student[2] + student[3] + student[4]
+            percentage = total / 3
 
-                        total = math + science + english
-
-                        percentage = total / 3
-
-                        if percentage >= 90:
-                            grade = "A+"
-
-                        elif percentage >= 80:
-                            grade = "A"
-
-                        elif percentage >= 70:
-                            grade = "B"
-
-                        elif percentage >= 60:
-                            grade = "C"
-
-                        elif percentage >= 40:
-                            grade = "D"
-
-                        else:
-                            grade = "F"
-
-                        break
-
-        except FileNotFoundError:
-            pass
+            if percentage >= 90:
+                grade = "A+"
+            elif percentage >= 80:
+                grade = "A"
+            elif percentage >= 70:
+                grade = "B"
+            elif percentage >= 60:
+                grade = "C"
+            elif percentage >= 40:
+                grade = "D"
+            else:
+                grade = "F"
 
     return render_template(
         "calculate_result.html",
         student=student,
         total=total,
-        percentage=round(percentage,2),
+        percentage=round(percentage, 2),
         grade=grade
     )
-
 if __name__ == "__main__":
     app.run(debug=True)
